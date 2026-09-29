@@ -1,0 +1,25 @@
+# 用宿主机的 PostgreSQL，不启动 compose 自带的 db 容器。
+# 服务器的 /etc/retailhot/.env 里设了 COMPOSE_FILE=docker-compose.yml:deploy/compose.host-db.yml，
+# 所以 docker compose 会自动合并这个文件；也要设 RETAILHOT_DATABASE_URL（见 retailhot.env.example）。
+# 容器通过 host.docker.internal（docker0 网关）连宿主机，宿主机的 pg_hba.conf 只放行 Docker 私有网段。
+
+x-host-db: &host-db
+  extra_hosts:
+    - "host.docker.internal:host-gateway"
+  environment:
+    DATABASE_URL: ${RETAILHOT_DATABASE_URL:?RETAILHOT_DATABASE_URL 没有设置（见 deploy/retailhot.env.example）}
+
+services:
+  # 放进一个默认不启用的 profile：docker compose up 不会启动它。
+  db:
+    profiles: ["bundled-db"]
+
+  setup:
+    <<: *host-db
+    depends_on: !reset null
+  api:
+    <<: *host-db
+  worker:
+    <<: *host-db
+  web:
+    <<: *host-db

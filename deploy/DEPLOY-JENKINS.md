@@ -8,8 +8,9 @@
 |---|---|
 | 配置（密钥） | `/etc/retailhot/.env`，root 所有、权限 600，模板是 `deploy/retailhot.env.example`。**不要提交到 Git** |
 | 发布记录 | `/opt/retailhot-releases/<时间戳>-<提交号>`，`current` 指向当前版本，保留 5 个 |
-| 容器 | Compose 项目 `aihot`：`db`（PostgreSQL 17）、`setup`（迁移，跑完退出）、`api`、`worker`、`web`（只监听 127.0.0.1:3000） |
-| 数据 | Docker 卷 `aihot_db`（数据库）、`aihot_data`（上传的图片、缓存）。`docker compose down` 不会删，`down -v` 会 |
+| 容器 | Compose 项目 `aihot`：`setup`（迁移，跑完退出）、`api`、`worker`、`web`（只监听 127.0.0.1:3000）。**不启动自带的 `db` 容器** |
+| 数据库 | 宿主机的 PostgreSQL 16，库和角色都叫 `retailhot`（连接数上限 30，每个进程的连接池上限 6）。容器通过 `host.docker.internal` 连它，`pg_hba.conf` 里只放行 Docker 私有网段 `172.16.0.0/12`。覆盖文件是 `deploy/compose.host-db.yml`，由 `.env` 里的 `COMPOSE_FILE` 自动合并 |
+| 文件 | Docker 卷 `aihot_data`（上传的图片、缓存）。`docker compose down` 不会删，`down -v` 会 |
 | nginx | `/etc/nginx/conf.d/retailhot.conf`，由 `deploy/nginx.conf.template` 生成；证书用 `/etc/nginx/cert/butik.com.cn/` 的泛域名证书 |
 
 ## 每次发布做了什么
@@ -35,7 +36,8 @@ sudo retailhot-deploy --rollback 20260929101500-abcdef123456
 cd /opt/retailhot-releases/current
 sudo docker compose ps
 sudo docker compose logs -f --tail 100 api worker web
-sudo docker compose exec -T db pg_dump -U aihot aihot | gzip > retailhot-$(date +%F).sql.gz   # 手动备份
+sudo -u postgres pg_dump retailhot | gzip > retailhot-$(date +%F).sql.gz   # 手动备份（数据库在宿主机上，不在容器里）
+sudo -u postgres psql retailhot                                               # 查数据库
 ```
 
 改了 `/etc/retailhot/.env` 之后，重新启用当前版本才会生效：`sudo retailhot-deploy --rollback <当前版本>`。
@@ -47,8 +49,15 @@ sudo docker compose exec -T db pg_dump -U aihot aihot | gzip > retailhot-$(date 
    ```bash
    sudo install -d -m 700 /etc/retailhot
    sudo install -m 600 deploy/retailhot.env.example /etc/retailhot/.env
-   sudo -e /etc/retailhot/.env     # 填 ADMIN_PASSWORD、SESSION_SECRET、IMG_PROXY_SIGN_SECRET、POSTGRES_PASSWORD、LLM_API_KEY
+   sudo -e /etc/retailhot/.env     # 填 ADMIN_PASSWORD、SESSION_SECRET、IMG_PROXY_SIGN_SECRET、RETAILHOT_DATABASE_URL、LLM_API_KEY
    ```
+   数据库：在宿主机建角色和库，并在 `pg_hba.conf` 里加一行，然后 reload（不用重启）：
+   ```bash
+   sudo -u postgres psql -c "CREATE ROLE retailhot LOGIN PASSWORD '<openssl rand -hex 32>' CONNECTION LIMIT 30" -c "CREATE DATABASE retailhot OWNER retailhot" -c "REVOKE ALL ON DATABASE retailhot FROM PUBLIC"
+   echo "host    retailhot       retailhot       172.16.0.0/12           scram-sha-256" | sudo tee -a /etc/postgresql/16/main/pg_hba.conf
+   sudo -u postgres psql -c "select pg_reload_conf()"
+   ```
+   `.env` 里的 `RETAILHOT_DATABASE_URL` 用同一个密码，主机名写 `host.docker.internal`。
 3. **部署脚本和 sudoers**（只允许 `deploy` 用户免密执行这一个命令）：
    ```bash
    sudo install -m 755 deploy/retailhot-deploy.sh /usr/local/sbin/retailhot-deploy
