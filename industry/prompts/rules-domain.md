@@ -1,45 +1,39 @@
 
-【AI 领域翻译规则 — 本平台 100% 是 AI/ML/LLM 行业内容，严格遵守】
+【品牌零售领域翻译规则 — 本平台内容是品牌零售（奢侈品、运动服饰、美妆、快消）的数字化与 AI 化，严格遵守】
 
-1. 歧义默认值：以下词在中文有非 AI 歧义，**一律按 AI 含义翻译**：
-   - LLM = 大语言模型（绝不译"法学硕士"/"Master of Laws"）
-   - Token / tokens = 模型 token（保留英文；绝不译"代币"/"令牌"）
-   - Transformer = Transformer 架构（保留英文；不译"变压器"）
-   - Diffusion = 扩散模型（AI 生成，不是物理扩散）
+1. 歧义默认值：以下词在中文有多种含义，**一律按品牌零售与数字化语境翻译**：
    - Agent / Agentic = AI 智能体 / 智能体的（不译"代理人"/"中介"）
-   - Alignment = 对齐（AI 安全语境）
-   - Inference = 推理（模型生成）
-   - Reasoning = 推理（注意：与 inference 都译"推理"，必要时用"链式推理"区分 CoT；reasoning model 指 o1/o3/R1 这类思考型模型）
-   - Embedding = 嵌入向量（也可保留英文）
-   - Distillation = 知识蒸馏
-   - Hallucination = 模型幻觉
-   - Fine-tune / Fine-tuning = 微调
-   - Pretrain / Pretraining = 预训练
-   - Context window = 上下文窗口
-   - Prompt = 提示词
-   - Skill / Skills = 技能（Claude 等 Agent 框架的能力包，不译"特长"）
+   - LLM = 大语言模型（绝不译"法学硕士"）
+   - Token / tokens = 模型 token（保留英文；不译"代币"）
+   - Conversion = 转化（转化率），不译"转换"
+   - Basket = 购物篮 / 客单（basket size = 客单量），不译"篮子"
+   - Traffic = 流量 / 客流（线上为流量，门店为客流）
+   - Fulfillment = 履约
+   - Assortment = 品类组合 / 商品结构
+   - SKU = SKU（保留英文）
+   - Sell-through = 售罄率；Markdown = 降价 / 折扣清仓（不译"标记"）
+   - Loyalty = 会员忠诚度 / 会员体系
+   - Omnichannel = 全渠道；Unified commerce = 统一商务
+   - Retail media = 零售媒体
+   - DTC / D2C = 直面消费者（DTC，保留英文）
+   - Try-on = 试穿（美妆为试妆）
+   - Digital product passport = 数字产品护照
+   - Personalization = 个性化
 
 2. 以下专有名词**一律保留英文原文**，不翻译不加中文括注：
-   - AI 公司：OpenAI / Anthropic / Google DeepMind / xAI / Meta AI / Mistral / DeepSeek / Cohere / HuggingFace（HF）/ Runway / ElevenLabs / Suno / Pika / Midjourney / Perplexity
-   - 模型族（举例 + 通用规则）：GPT / Claude / Gemini / Llama / Qwen / Grok / o 系列 / DeepSeek / Mistral / Mixtral / Phi / Sora / Veo / Imagen
-     **规则**：任何大模型族名、产品代号一律保留英文
-   - 模型版本号（举例 + 通用规则）：GPT-5 / Claude 4.7 / Claude Sonnet 4.6 / Llama 4 / Gemini 3 / o3 / o4 / DeepSeek-V4 / Qwen3.7
-     **规则**：版本号一字不改（包括字母数字后缀如 4o / 4.7 / 405B / V4 / R1），绝不"翻译性扩写"（不要把 "405B" 译成 "4050 亿"，不要把 "V4" 译成 "第 4 代"）
-   - 技术缩写（举例 + 通用规则）：LLM / RAG / RLHF / DPO / LoRA / QLoRA / PEFT / MoE / CoT / ReAct / KV cache / SOTA / AGI / MCP / ADK / NPU / GPU / TPU
-     **规则**：任何 2-5 字母的全大写缩写，默认按 AI/ML 含义保留英文
-   - 评测基准（举例 + 通用规则）：MMLU / GPQA / HumanEval / SWE-bench / SWE-bench Verified / AIME / HLE / ARC-AGI / ARC-AGI 2 / MT-Bench / Chatbot Arena / Aider Polyglot / LiveCodeBench
-     **规则**：以 -bench / -eval 结尾或全大写的评测名一律保留英文
-   - AI 工具/产品：Cursor / Copilot / Codex / Aider / Devin / Cline / Claude Code / Windsurf / Zed / v0 / Bolt / Lovable / Replit Agent
-   - Agent 框架：LangChain / LangGraph / LlamaIndex / CrewAI / AutoGen / Pydantic AI / Vercel AI SDK / DSPy
-   - 推理/部署：Ollama / vLLM / SGLang / TensorRT / Triton / CUDA / ROCm
-   - 通用技术：API / SDK / CLI / IDE / SaaS / CDN / SSO / OAuth / JWT / WebSocket / SSE / gRPC
+   - 技术与业务缩写：AI / GenAI / LLM / RAG / API / SDK / SaaS / CRM / CDP / ERP / OMS / WMS / POS / RFID / NFC / AR / VR / KPI / GMV / ROI / SKU / DTC
+   - 平台与技术厂商：Shopify / Salesforce / SAP / Oracle / Adobe / Amazon / AWS / Google / Microsoft / OpenAI / Meta / TikTok Shop / Snowflake
+   - 通用技术：API / SDK / CLI / IDE / CDN / SSO / OAuth
+   - 模型与产品名及其版本号（如 GPT-5、Gemini 3、Qwen3）一字不改，不做"翻译性扩写"
 
-3. 中国厂商**优先用官方中文品牌名**（首次出现可双标"千问（Qwen3）"，后续选一种保持一致）：
-   - 千问（Qwen）/ 文心一言 / 智谱（GLM）/ 月之暗面（Kimi）/ 深度求索（DeepSeek）/ 阶跃星辰（Step）/ 零一万物（Yi）/ 百川 / 豆包（字节）/ 混元（腾讯）/ 可灵（Kling，快手）/ 即梦（Jimeng，字节）/ MiniMax（不译）/ 美团 LongCat / 昆仑万维 Skywork / 面壁 MiniCPM / 华为昇腾 / 寒武纪
+3. 品牌与公司名**优先使用通行的官方中文名**；没有通行中文名的保留英文：
+   - 奢侈品：LVMH（路威酩轩）/ Louis Vuitton（路易威登）/ Dior（迪奥）/ Sephora（丝芙兰）/ Tiffany（蒂芙尼）/ Kering（开云）/ Gucci（古驰）/ Saint Laurent（圣罗兰）/ Balenciaga（巴黎世家）/ Richemont（历峰）/ Cartier（卡地亚）/ Hermès（爱马仕）/ Chanel（香奈儿）/ Prada（普拉达）/ Burberry（博柏利）
+   - 运动服饰：Nike（耐克）/ adidas（阿迪达斯）/ Puma（彪马）/ Under Armour（安德玛）/ lululemon / Anta（安踏）/ Li-Ning（李宁）/ FILA（斐乐）/ Descente（迪桑特）/ Arc'teryx（始祖鸟）/ On（昂跑）/ Hoka
+   - 美妆：L'Oréal（欧莱雅）/ Estée Lauder（雅诗兰黛）/ Shiseido（资生堂）/ Coty（科蒂）/ Sephora（丝芙兰）/ Ulta / Proya（珀莱雅）/ Chando（自然堂）
+   - 快消：Unilever（联合利华）/ P&G（宝洁）/ Nestlé（雀巢）/ Coca-Cola（可口可乐）/ PepsiCo（百事）/ Mondelez（亿滋）/ Danone（达能）/ Mengniu（蒙牛）/ Yili（伊利）
+   - 中国平台：Alibaba（阿里巴巴）/ Tmall（天猫）/ Taobao（淘宝）/ JD.com（京东）/ Douyin（抖音）/ Xiaohongshu（小红书）/ WeChat（微信）/ Tencent（腾讯）/ Pinduoduo（拼多多）/ Meituan（美团）/ Qwen（千问）
 
 4. 代码 / 命令 / URL / 数字单位 **一字不改**保留：
-   - 反引号代码 `code` 不翻译
-   - 命令如 /code-review、pip install、npm run 不译（不要译"代码审查"）
-   - URL 原样
-   - 数字+单位：8k context / 175B params / 3.5x speedup / $3 per M tokens / 99.9%
-   - 金额、参数量、比例、区间必须保留原文的阿拉伯数字和单位；不要把 $10B-$100B 改写成“数百亿至数千亿美元”等中文数量词
+   - 反引号代码 `code` 不翻译，URL 原样
+   - 数字+单位：$3 billion / 12% YoY / 500 stores / 1.2M users
+   - 金额、比例、区间、门店与用户数量必须保留原文的阿拉伯数字和单位；不要把 $10B-$100B 改写成“数百亿至数千亿美元”等中文数量词；货币不换算、不四舍五入

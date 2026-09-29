@@ -4,18 +4,18 @@
 
 export const SITE = {
   /** 站名：导航、页面标题、分享图、RSS、MCP、后台都用它。 */
-  name: "MyHOT",
+  name: "RetailHOT",
   /**
    * 行业词：拼进默认说法里，比如“AI 日报”“AI 动态”。
    * 改成“法律”“HR”“黄金”之类，页面上就会变成“法律日报”“法律动态”。
    */
-  subject: "AI",
+  subject: "零售",
   /** 首页的完整标题（浏览器标签、搜索结果）。 */
-  homeTitle: "MyHOT — AI 行业动态 · 每日精选与日报",
+  homeTitle: "RetailHOT — 品牌零售数字化与 AI 动态 · 每日精选与日报",
   /** 一句话介绍：搜索引擎、分享卡片、RSS、llms.txt 会用。 */
-  description: "自动盯住上百个信源，用模型摘要、打分、精选，把同一件事的多篇报道归到一起，每天早上出一份日报。",
+  description: "盯住品牌零售的数字化、智能化与 AI 化动态：自动盯住上百个信源，用模型摘要、打分、精选，把同一件事的多篇报道归到一起，每天早上出一份日报。",
   /** 首页左上角和侧边栏下面的一行小字。 */
-  tagline: "值得关注的 AI 动态",
+  tagline: "值得关注的品牌零售数字化与 AI 动态",
   /** 界面语言（HTML lang、og:locale）。 */
   locale: "zh-CN",
   /** 默认域名，只在没设置 SITE_URL 时使用。 */
@@ -24,7 +24,7 @@ export const SITE = {
    * MCP 工具名的前缀（小写字母、数字、下划线），工具会叫 myhot_get_latest、myhot_search……
    * 已经有人接入后就不要再改。
    */
-  mcpPrefix: "myhot",
+  mcpPrefix: "retailhot",
   /** 对外联系邮箱（选填）：使用规则、llms.txt、响应头里会写。 */
   contactEmail: null as string | null,
   /** 页脚的一行小字（选填）。 */
@@ -33,19 +33,19 @@ export const SITE = {
   icp: null as string | null,
   /** 结构化数据里的网站运营者（搜索引擎用）。 */
   organization: {
-    name: "MyHOT",
+    name: "RetailHOT",
     /** 创始人（选填）：{ name, url, description }。 */
     founder: null as null | { name: string; url?: string; description?: string },
   },
   /** 抓取信源时报上的名字（User-Agent 里用），不要冒用别的站。 */
-  crawlerName: "MyHOTBot",
+  crawlerName: "RetailHOTBot",
 } as const;
 
 /** 关于页的文案。数字（信源数、收录数、精选数、日报期数）来自站内实时统计，不用写在这里。 */
 export const ABOUT = {
   kicker: `关于 ${SITE.name}`,
   /** 大标题：第一行正常颜色，第二行强调色。 */
-  headline: ["AI 圈每天都有新动静，", "值得看的，只有几条。"] as [string, string],
+  headline: ["零售的数字化每天都有新动静，", "值得看的，只有几条。"] as [string, string],
   /** 标题下面的一段话。{sources} 会换成实时的信源数。 */
   lead: `${SITE.name} 替你盯着 {sources} 个信源：抓取、归并、打分、精选，每天早上 8 点出一份日报。免费，不用注册。`,
   /** 信源河动画下面的四个环节。 */

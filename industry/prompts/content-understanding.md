@@ -8,19 +8,18 @@
 
 ## 内容类型
 
-`itemType` 必须七选一：
+`itemType` 必须六选一：
 
-- `model_release`：新模型或大版本更新
-- `product_launch`：新产品、工具或重大功能更新
-- `tool_or_prompt`：可直接复用的方法、Prompt、Skill 或技巧
-- `research_paper`：论文、研究或技术报告
-- `industry_event`：融资、收购、监管、诉讼、商业动作或人事
-- `opinion_analysis`：观点、行业判断、复盘或长访谈
-- `tutorial_explainer`：教程、科普、解读或评测
+- `product_launch`：面向品牌零售的新产品、平台、系统或重大功能发布与更新
+- `practice_case`：品牌或零售商的数字化、AI 落地案例与实践复盘
+- `brand_move`：品牌、零售商、平台或厂商的战略、组织、合作、融资、并购、监管与人事动作
+- `market_report`：行业报告、调研、市场数据、财报与政策解读
+- `opinion_analysis`：观点、行业判断、评论、访谈与趋势分析
+- `playbook_explainer`：可复用的方法论、教程、科普、解读或评测
 
-优先级：发了模型选 model_release；发了工具选 product_launch；发了 Prompt 或方法选 tool_or_prompt；论文优先 research_paper；评测选 tutorial_explainer。
+优先级：发了产品或功能选 product_launch；讲品牌怎么做成一件事选 practice_case；有明确数据或报告选 market_report；评测和方法论选 playbook_explainer。
 
-输出前检查 `itemType` 与第一个分类标签是否自洽：`model_release` 对应“模型发布”，`product_launch` 对应“产品更新”，`research_paper` 对应“论文/研究”，`industry_event` 对应“行业动态”或“政策/监管”，`opinion_analysis` 对应“大佬观点”或“现象/趋势”，`tutorial_explainer` 对应“教程/实践”或“评测/基准”。如果二者冲突，按当前材料的核心事件修正后再输出。
+输出前检查 `itemType` 与第一个分类标签是否自洽：`product_launch` 对应“产品发布”，`practice_case` 对应“案例/实践”，`brand_move` 对应“品牌战略”“融资并购”或“政策/监管”，`market_report` 对应“行业数据”，`opinion_analysis` 对应“观点/趋势”，`playbook_explainer` 对应“案例/实践”。内容主要讲 AI、数字化运营或门店科技时，第一个标签也可以是“AI应用”“数字化运营”“门店科技”。如果二者冲突，按当前材料的核心事件修正后再输出。
 
 ## 作者角色
 
@@ -32,14 +31,14 @@
 
 ## 标签
 
-`tags` 输出 1–6 个字符串。第一个必须从以下分类标签中选一个：模型发布、产品更新、开源/仓库、论文/研究、教程/实践、大佬观点、评测/基准、安全/对齐、现象/趋势、行业动态、政策/监管、非AI/通用工具、其他。
+`tags` 输出 1–6 个字符串。第一个必须从以下分类标签中选一个：产品发布、AI应用、数字化运营、门店科技、品牌战略、融资并购、政策/监管、行业数据、案例/实践、观点/趋势、其他。
 
 其后可选 0–5 个适用标签，并且只能来自以下两个白名单：
 
-- 主题：Agent、编码、推理、多模态、语音、视频、图像生成、RAG、端侧、数据/训练、搜索、部署/工程、开源生态、具身智能、MCP/工具调用
-- 实体：OpenAI、Anthropic、DeepSeek、DeepMind、Google、Meta、Microsoft、xAI、Hugging Face、GitHub、arXiv
+- 主题：奢侈品、运动服饰、美妆、快消、生成式AI、AI Agent、智能导购、智能客服、营销自动化、内容生成、需求预测、供应链、全渠道、会员/CDP、私域、直播电商、虚拟试穿、数字人、跨境电商、即时零售、数据合规、数字护照/溯源、可持续、AR/VR
+- 实体：LVMH、开云、历峰、爱马仕、香奈儿、耐克、阿迪达斯、安踏、欧莱雅、阿里巴巴、京东、抖音、腾讯、亚马逊
 
-正文中即使明确出现了 NVIDIA、Apple、阿里等其他实体，也不要把它们放进 `tags`。不要创造白名单之外的标签。没有适用的主题或实体时，只返回第一个分类标签；例如学校限制 AI 使用的监管新闻，不需要强行归到“编码”或“推理”。
+正文中即使明确出现了 Salesforce、SAP、Shopify、宝洁、雅诗兰黛等其他实体，也不要把它们放进 `tags`。不要创造白名单之外的标签。品牌赛道（奢侈品、运动服饰、美妆、快消）标签只在内容明确属于该赛道时才加。没有适用的主题或实体时，只返回第一个分类标签；例如一份通用的零售行业报告，不需要强行归到某个赛道或技术方向。
 
 ## 候选阅读价值
 
@@ -59,4 +58,4 @@
 
 只返回合法 JSON，不要 Markdown，不要解释。顶层必须且只能包含以下六个字段：
 
-{"itemType":"product_launch","authorRole":"principal","tags":["产品更新","Agent"],"editorialJudgment":"原文给出了能力变化和开放入口，读者可以据此判断它会怎样改变现有工作流。","titleZh":"某产品发布智能体功能","summaryZh":"某产品发布新的智能体功能，给出了开放入口和主要能力变化。"}
+{"itemType":"product_launch","authorRole":"principal","tags":["产品发布","AI Agent","智能导购"],"editorialJudgment":"原文给出了功能范围和开放渠道，品牌可以据此判断它对现有导购流程的影响。","titleZh":"某平台发布智能导购助手","summaryZh":"某平台发布面向品牌的智能导购助手，给出了开放渠道和主要功能。"}
